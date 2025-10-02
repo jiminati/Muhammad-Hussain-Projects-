@@ -1,0 +1,116 @@
+#include<Servo.h>
+#include<PID_v1.h>
+
+
+const int servoPin = 9;                                               //Servo Pin
+const int trigPin = 7;//ultrasonic sensor
+const int echoPin = 6;
+int distanceLatest = 0;
+ 
+float Kp = 1;                                                    //Initial Proportional Gain
+float Ki = 2;                                                      //Initial Integral Gain
+float Kd = 9;                                                    //Intitial Derivative Gain
+double Setpoint, Input, Output, ServoOutput;                                       
+
+
+
+PID myPID(&Input, &Output, &Setpoint, Kp, Ki, Kd, DIRECT);           //Initialize PID object, which is in the class PID.
+                                                                      
+                                                                     
+                                                                     
+                                                                     
+Servo myServo;                                                       //Initialize Servo.
+
+
+void setup() {
+
+  Serial.begin(9600);                                                //Begin Serial 
+  myServo.attach(servoPin);                                          //Attach Servo
+  pinMode(trigPin,OUTPUT);
+  pinMode(echoPin,INPUT);
+  Input = readPosition();                                            //Calls function readPosition() and sets the balls
+                                                                     //  position as the input to the PID algorithm
+                                                                     
+   myServo.write(90); 
+ 
+  myPID.SetMode(AUTOMATIC);                                          //Set PID object myPID to AUTOMATIC 
+  myPID.SetOutputLimits(-30,80);  
+                                            //Set Output limits to -80 and 80 degrees. 
+}
+
+void loop()
+{
+ 
+  Setpoint = 10;                    //enter a value between 5 and 20
+  Input = readPosition();                                            
+ 
+  myPID.Compute();                                                   //computes Output in range of -80 to 80 degrees
+  
+  ServoOutput=40+Output;                                            // 102 degrees is my horizontal 
+  myServo.write(ServoOutput);            
+  delay(200);//Writes value of Output to servo
+  
+  
+}
+      
+      
+      
+
+float readPosition() {
+  delay(30);                                                            //Don't set too low or echos will run into eachother.      
+  
+  
+
+
+unsigned long now = millis();
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(5);
+  // Sets the trigPin on HIGH state for 10 micro seconds
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(80);
+    digitalWrite(trigPin, LOW);
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  
+  float duration = pulseIn(echoPin, HIGH);
+  // Calculating the distance
+  float unfilterDistance = duration * 0.034 / 2;
+ 
+  float distance = duration * 0.034 / 2;
+ 
+  if (distance >25 && distance <700 )
+  {distance = Setpoint+2;
+  }
+
+ // else if (distance >45 && distance < 200 )
+  //{distance = Setpoint;
+  //}
+  else if (distance >700 )
+  {distance = 4;
+  }
+ 
+  
+ /* if(distance< 30 ){
+    distanceLatest = distance;
+    }
+     if (distance > 30){
+    distance = distanceLatest;
+    
+    }
+
+  if(distance)*/  
+  Serial.print("Distance: ");
+  Serial.println(unfilterDistance);
+  // Serial.print("ServoAngle: ");
+ // Serial.println(ServoOutput);
+  
+ 
+  
+  
+  
+  
+  return distance;   
+  
+  
+  
+  //Returns distance value.
+}
