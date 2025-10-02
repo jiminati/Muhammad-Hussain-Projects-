@@ -1,0 +1,142 @@
+// Pin Definitions
+// R1, L1 = Left side
+int R1_en = 9; 
+int L1_en = 6;
+int R1_pwm = 13;
+int L1_pwm = 12;
+
+// R2, L2 = Right side
+int R2_en = 22;
+int L2_en = 24;
+int R2_pwm = 7;
+int L2_pwm = 8;  
+
+// R3, L3 = Weapon
+int R3_en = 50;
+int L3_en = 52;
+int R3_pwm = 3;
+int L3_pwm = 5; 
+
+// RC channels
+int channel_2 = 10;  // Forward / Backward
+int channel_4 = 11;  // Left / Right
+int channel_6 = 2;   // Weapon Control
+
+void setup() {
+  pinMode(channel_2, INPUT);
+  pinMode(R1_en, OUTPUT);
+  pinMode(L1_en, OUTPUT);
+  pinMode(R1_pwm, OUTPUT);
+  pinMode(L1_pwm, OUTPUT);
+  
+  pinMode(channel_4, INPUT);
+  pinMode(R2_en, OUTPUT);
+  pinMode(L2_en, OUTPUT);
+  pinMode(R2_pwm, OUTPUT);
+  pinMode(L2_pwm, OUTPUT);
+
+  pinMode(channel_6, INPUT);
+  pinMode(R3_en, OUTPUT);
+  pinMode(L3_en, OUTPUT);
+  pinMode(R3_pwm, OUTPUT);
+  pinMode(L3_pwm, OUTPUT);
+  
+  Serial.begin(9600);
+}
+
+void loop() {
+  int value1 = pulseIn(channel_2, HIGH); // forward/backward
+  int value2 = pulseIn(channel_4, HIGH); // left/right
+  int valueWpn = pulseIn(channel_6, HIGH); // weapon
+  
+  Serial.print("value1 = ");
+  Serial.println(value1); 
+
+  // Stop condition
+  if(value1 == 0) {
+    digitalWrite(R1_en, LOW);
+    digitalWrite(L1_en, LOW);
+    digitalWrite(R1_pwm, LOW);
+    digitalWrite(L1_pwm, LOW);
+
+    digitalWrite(R2_en, LOW);
+    digitalWrite(L2_en, LOW);
+    digitalWrite(R2_pwm, LOW);
+    digitalWrite(L2_pwm, LOW);
+  }
+  // Forward / Backward movement
+  else if(value2 > 1400 && value2 < 1600) {
+    if(value1 > 1700) { // Forward
+      digitalWrite(R1_en, HIGH);
+      digitalWrite(L1_en, HIGH);
+      digitalWrite(R1_pwm, HIGH);
+      digitalWrite(L1_pwm, LOW);
+
+      digitalWrite(R2_en, HIGH);
+      digitalWrite(L2_en, HIGH);
+      digitalWrite(R2_pwm, HIGH);
+      digitalWrite(L2_pwm, LOW);
+    } 
+    else if(value1 < 1450) { // Backward
+      digitalWrite(R1_en, HIGH);
+      digitalWrite(L1_en, HIGH);
+      digitalWrite(R1_pwm, LOW);
+      digitalWrite(L1_pwm, HIGH);
+
+      digitalWrite(R2_en, HIGH);
+      digitalWrite(L2_en, HIGH);
+      digitalWrite(R2_pwm, LOW);
+      digitalWrite(L2_pwm, HIGH);
+    } 
+    else { // Neutral
+      digitalWrite(R1_en, LOW);
+      digitalWrite(L1_en, LOW);
+      digitalWrite(R1_pwm, LOW);
+      digitalWrite(L1_pwm, LOW);
+
+      digitalWrite(R2_en, LOW);
+      digitalWrite(L2_en, LOW);
+      digitalWrite(R2_pwm, LOW);
+      digitalWrite(L2_pwm, LOW);
+    }
+  }
+
+  // Turning
+  if(value2 > 1600) { // Right
+    digitalWrite(R1_en, HIGH);
+    digitalWrite(L1_en, HIGH);
+    digitalWrite(R1_pwm, HIGH);
+    digitalWrite(L1_pwm, LOW);
+
+    digitalWrite(R2_en, HIGH);
+    digitalWrite(L2_en, HIGH);
+    digitalWrite(R2_pwm, LOW);
+    digitalWrite(L2_pwm, HIGH);
+  } 
+  else if(value2 < 1400 && value2 > 1000) { // Left
+    digitalWrite(R1_en, HIGH);
+    digitalWrite(L1_en, HIGH);
+    digitalWrite(R1_pwm, LOW);
+    digitalWrite(L1_pwm, HIGH);
+
+    digitalWrite(R2_en, HIGH);
+    digitalWrite(L2_en, HIGH);
+    digitalWrite(R2_pwm, HIGH);
+    digitalWrite(L2_pwm, LOW);
+  }
+
+  // Weapon control
+  if(valueWpn > 1100) { 
+    int pwmWpn = map(valueWpn, 1100, 2000, 0, 255);
+    digitalWrite(R3_en, HIGH);
+    digitalWrite(L3_en, HIGH);
+    analogWrite(R3_pwm, pwmWpn);
+    analogWrite(L3_pwm, 0);
+  } 
+  else if(valueWpn < 1100) { 
+    digitalWrite(R3_en, LOW);
+    digitalWrite(L3_en, LOW);
+    analogWrite(R3_pwm, 0);
+    analogWrite(L3_pwm, 0);
+  }
+}
