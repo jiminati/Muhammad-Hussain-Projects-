@@ -1,0 +1,58 @@
+% Setting up Arduino Connection
+%a = arduino('COM10', 'Mega2560'); % Ensure the correct COM port is used
+
+% Attaching servos to corresponding pins on the Arduino
+%servo1 = servo(a, 'D7');   % Servo for Joint 1
+%servo2 = servo(a, 'D8');   % Servo for Joint 2
+%servo3 = servo(a, 'D9');   % Servo for Joint 3
+
+% Link Lengths (L1, L2, L3)
+L1 = 6.5; % Length of first link
+L2 = 10.5; % Length of second link
+L3 = 4; % Length of third link
+
+% User Input: End Effector Position
+x = input('Enter x-coordinate of the end effector: ');
+y = input('Enter y-coordinate of the end effector: ');
+z = input('Enter z-coordinate of the end effector: ');
+
+% Step 1: Compute r and θ1
+r = sqrt(x^2 + y^2 + z^2); % Equation (12)
+
+if r == 0
+    disp('Target is at the origin. Setting default joint angles.');
+    theta1 = 0;
+    theta2 = 90; % Default angle for θ2 when the end effector is at the origin
+    theta3 = 180; % Default angle for θ3 when the end effector is at the origin
+else
+    theta1 = atan2d(y, x); % Equation (13)
+
+    % Step 2: Compute θ3 using the cosine rule (Equation 15)
+    cos_theta3 = (r^2 - L1^2 - L2^2) / (2 * L1 * L2);
+    cos_theta3 = max(-1, min(1, cos_theta3)); % Clamp to [-1, 1]
+    theta3 = acosd(cos_theta3);
+
+    % Step 3: Compute θ2 using Equations (16), (17), and (18)
+    alpha = asind(z / r); % Equation (16)
+    beta = atan2d(L2 * sind(theta3), L1 + L2 * cosd(theta3)); % Equation (17)
+    theta2 = alpha + beta; % Equation (18)
+end
+
+% Display Joint Angles
+disp('Computed Joint Angles:');
+disp(['θ1: ', num2str(theta1), ' degrees']);
+disp(['θ2: ', num2str(theta2), ' degrees']);
+disp(['θ3: ', num2str(theta3), ' degrees']);
+
+% Normalize angles to servo range (0°–180°) and map to [0, 1]
+servo1_angle = max(0, min(180, theta1)) / 180;
+servo2_angle = max(0, min(180, theta2)) / 180;
+servo3_angle = max(0, min(180, theta3)) / 180;
+
+% Move Servos to Desired Angles
+writePosition(servo1, servo1_angle); % Move Servo 1
+writePosition(servo2, servo2_angle); % Move Servo 2
+writePosition(servo3, servo3_angle); % Move Servo 3
+
+disp('Servos moved to desired angles.');
+

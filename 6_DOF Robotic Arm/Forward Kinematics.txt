@@ -1,0 +1,90 @@
+% Setting up Arduino Connection (only needs to be run once)
+%a = arduino('COM10', 'Mega2560');
+
+% Attaching servos to corresponding pins on the arduino
+%servo1 = servo(a, 'D7');   % Servo for Joint 1
+%servo2 = servo(a, 'D8');  % Servo for Joint 2
+%servo3 = servo(a, 'D9');  % Servo for Joint 3
+
+% noting down the DH Parameters
+Alpha = deg2rad([0, 90, 0]);   % Link twists in radians
+a_vals = [0, 0, 10.5];         % Link lengths
+d_vals = [6.5, 0, 0];          % Link offsets
+
+% Taking Joint Angles as input from the user
+theta1 = input('Enter the value of theta1 (in degrees): ');
+theta2 = input('Enter the value of theta2 (between 0 and 90) (in degrees): ');
+theta3 = input('Enter the value of theta3 (between 0 and 90) (in degrees): ');
+
+%Conditions
+if theta2 < 0 || theta2 > 90
+    error('Theta2 must be between 0° and 90°.');
+end
+if theta3 < 0 || theta3 > 90
+    error('Theta3 must be between 0° and 90°.');
+end
+
+Theta = deg2rad([theta1, theta2, theta3]);  % Convert to radians
+
+% Calculating DH Transformation Matrices
+dh_transform = @(theta, d, a, alpha) [ ...
+    cos(theta), -sin(theta)*cos(alpha), sin(theta)*sin(alpha), a*cos(theta); ...
+    sin(theta), cos(theta)*cos(alpha), -cos(theta)*sin(alpha), a*sin(theta); ...
+    0, sin(alpha), cos(alpha), d; ...
+    0, 0, 0, 1];
+
+
+Frame_1 = dh_transform(Theta(1), d_vals(1), a_vals(1), Alpha(1));
+Frame_2 = dh_transform(Theta(2), d_vals(2), a_vals(2), Alpha(2));
+Frame_3 = dh_transform(Theta(3), d_vals(3), a_vals(3), Alpha(3));
+
+% Overall Transformation Matrix
+Frame_0 = Frame_1 * Frame_2 * Frame_3;
+
+% Joint Positions
+P0 = [0; 0; 0; 1];     % Base position
+P3 = Frame_0 * P0;      % End-effector position
+
+% Output: End-Effector Position
+fprintf('The end-effector position is: \n');
+fprintf('Px = %f, Py = %f, and Pz = %f\n', P3(1), P3(2), P3(3));
+
+% Converting Joint Angles to Servo Values
+servo_val1 = mapServoValue(theta1);
+servo_val2 = mapTheta2ServoValue(theta2);  % Custom mapping for Theta2
+servo_val3 = mapTheta3ServoValue(theta3);  % Custom mapping for Theta3
+
+% Controlling the Servos
+writePosition(servo1, servo_val1);
+writePosition(servo2, servo_val2);
+writePosition(servo3, servo_val3);
+
+fprintf('Servos moved to positions: %f, %f, %f\n', servo_val1*180, servo_val2*180, servo_val3*180);
+
+% Helper Function to Map Angles to Servo Values
+function servo_val = mapServoValue(angle)
+    % Map an angle (in degrees) to a servo value between 0 and 1
+    min_angle = 0;   % Minimum servo angle in degrees
+    max_angle = 180; % Maximum servo angle in degrees
+    servo_val = (angle - min_angle) / (max_angle - min_angle);
+end
+
+function servo_val = mapTheta2ServoValue(angle)
+    % Map Theta2 from 0-90 degrees to 45-135 degrees for servo control
+    min_input = 0;   % Input range: 0 degrees
+    max_input = 90;  % Input range: 90 degrees
+    min_output = 45; % Output range: 45 degrees
+    max_output = 135; % Output range: 135 degrees
+    scaled_angle = ((angle - min_input) * (max_output - min_output) / (max_input - min_input)) + min_output;
+    servo_val = (scaled_angle - 0) / 180;  % Convert to servo value between 0 and 1
+end
+
+function servo_val = mapTheta3ServoValue(angle)
+    % Map Theta3 from 0-90 degrees to 170-80 degrees for servo control
+    min_input = 0;   % Input range: 0 degrees
+    max_input = 90;  % Input range: 90 degrees
+    min_output = 170; % Output range: 170 degrees
+    max_output = 80;  % Output range: 80 degrees
+    scaled_angle = ((angle - min_input) * (max_output - min_output) / (max_input - min_input)) + min_output;
+    servo_val = (scaled_angle - 0) / 180;  % Convert to servo value between 0 and 1
+end

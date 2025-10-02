@@ -1,0 +1,28 @@
+% Serial setup
+s = serialport("COM3", 115200);
+pause(2);
+
+Kp = [2 2 2 1 1 1];
+Ki = [0.1 0.1 0.1 0.05 0.05 0.05];
+Kd = [0.5 0.5 0.5 0.3 0.3 0.3];
+dt = 0.05;
+
+targetPos = [30 45 60 0 45 90];
+currentPos = zeros(1,6);
+integral = zeros(1,6);
+prevError = zeros(1,6);
+
+for t = 0:dt:10
+    error = targetPos - currentPos;
+    integral = integral + error * dt;
+    derivative = (error - prevError) / dt;
+    controlSignal = Kp .* error + Ki .* integral + Kd .* derivative;
+    currentPos = currentPos + controlSignal * dt;
+    prevError = error;
+
+    % Send positions to Arduino
+    cmd = sprintf("%.2f,%.2f,%.2f,%.2f,%.2f,%.2f\n", currentPos);
+    write(s, cmd, "string");
+end
+
+clear s
