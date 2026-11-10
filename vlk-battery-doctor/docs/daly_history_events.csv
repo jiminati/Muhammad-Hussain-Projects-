@@ -1,0 +1,118 @@
+key,english,level
+charging_mos_temperature_detection_fault,Charging MOS Temp Detection Fault,
+discharging_mos_temperature_detection_fault,Discharging MOS Temp Detection Fault,
+ambient_temperature_fault,Ambient Temperature Fault,
+eeprom_fault,EEPROM Fault,
+flash_fault,Flash Memory Fault,
+charging_mos_fault,Charging MOS Fault,
+discharging_mos_fault,Discharging MOS Fault,
+pre_charging_mos_fault,Pre-charge MOS Fault,
+no_fault,No Fault,
+charge_mos_temperature_sensor_fault,Charging MOS Temperature Sensor Fault,
+discharge_mos_temperature_sensor_fault,Discharging MOS Temperature Sensor Fault,
+charge_mos_adhesive_fault,Charging MOS Stuck-On Fault,
+discharge_mos_adhesive_fault,Discharging MOS Stuck-On Fault,
+charge_mos_short_circuit_fault,Charging MOS Open-Circuit Fault,
+discharge_mos_short_circuit_fault,Discharging MOS Open-Circuit Fault,
+charge_afe_fault,Charging AFE Sampling Chip Fault,
+single_unit_temperature_sensor_fault,Cell Temperature Sensor Fault,
+rtc_clock_fault,RTC Clock Fault,
+vehicle_comm_fault,Vehicle Communication Fault,
+internal_comm_fault,Internal Network Communication Module Fault,
+current_module_fault,Current Sampling Module Fault,
+total_voltage_module_fault,Pack Total Voltage Detection Module Fault,
+short_circuit_protection_fault,Short-Circuit Protection Fault,
+low_voltage_prohibited_charging_fault,Low-Voltage Charge Inhibit Fault,
+thermal_runaway_fault,Thermal Runaway Fault,
+heating_fault,Heating System Fault,
+balance_module_communication_fault,Balancing Module Communication Fault,
+total_voltage_high_fault,Level 1 Fault: Pack Overvoltage,1
+total_voltage_low_fault,Level 1 Fault: Pack Undervoltage,1
+soc_high_fault,Level 1 Fault: Excessively High SOC,1
+soc_low_fault,Level 1 Fault: Excessively Low SOC,1
+charge_current_fault,Level 1 Fault: Charging Overcurrent,1
+discharge_current_fault,Level 1 Fault: Discharging Overcurrent,1
+discharge_temperature_high_fault,Level 1 Fault: Discharging Over-Temperature,1
+discharge_temperature_low_fault,Level 1 Fault: Discharging Low-Temperature,1
+single_cell_voltage_high_fault,Level 1 Fault: Cell Overvoltage,1
+single_cell_voltage_low_fault,Level 1 Fault: Cell Undervoltage,1
+differential_pressure_high_fault,Level 1 Fault: Excessive Voltage Difference,1
+differential_temperature_high_fault,Level 1 Fault: Excessive Temperature Difference,1
+charge_temperature_low_fault,Level 1 Fault: Charging Low-Temperature,1
+charge_temperature_high_fault,Level 1 Fault: Charging Over-Temperature,1
+mos_temperature_high_fault,Level 1 Fault: MOS Over-Temperature,1
+ambient_temperature_high_fault,Level 1 Fault: Ambient Over-Temperature,1
+soh_low_fault,Level 1 Fault: Excessively Low SOH,1
+total_voltage_high_2_fault,Level 2 Fault: Pack Overvoltage,2
+total_voltage_low_2_fault,Level 2 Fault: Pack Undervoltage,2
+soc_high_2_fault,Level 2 Fault: Excessively High SOC,2
+soc_low_2_fault,Level 2 Fault: Excessively Low SOC,2
+charge_current_2_fault,Level 2 Fault: Charging Overcurrent,2
+discharge_current_2_fault,Level 2 Fault: Discharging Overcurrent,2
+single_cell_voltage_high_2_fault,Level 2 Fault: Cell Overvoltage,2
+single_cell_voltage_low_2_fault,Level 2 Fault: Cell Undervoltage,2
+differential_pressure_high_2_fault,Level 2 Fault: Excessive Voltage Difference,2
+discharge_temperature_high_2_fault,Level 2 Fault: Discharging Over-Temperature,2
+discharge_temperature_low_2_fault,Level 2 Fault: Discharging Low-Temperature,2
+differential_temperature_high_2_fault,Level 2 Fault: Excessive Temperature Difference,2
+charge_temperature_low_2_fault,Level 2 Fault: Charging Low-Temperature,2
+charge_temperature_high_2_fault,Level 2 Fault: Charging Over-Temperature,2
+charge_mos_temperature_high_2_fault,Level 2 Fault: Charging MOS Over-Temperature,2
+mos_temperature_high_2_fault,Level 2 Fault: MOS Over-Temperature,2
+ambient_temperature_high_2_fault,Level 2 Fault: Ambient Over-Temperature,2
+soh_low_2_fault,Level 2 Fault: Excessively Low SOH,2
+total_voltage_high_3_fault,Level 3 Fault: Pack Overvoltage,3
+total_voltage_low_3_fault,Level 3 Fault: Pack Undervoltage,3
+soc_high_3_fault,Level 3 Fault: Excessively High SOC,3
+soc_low_3_fault,Level 3 Fault: Excessively Low SOC,3
+charge_current_3_fault,Level 3 Fault: Charging Overcurrent,3
+discharge_current_3_fault,Level 3 Fault: Discharging Overcurrent,3
+temperature_high_3_fault,Level 3 Fault: Over-Temperature,3
+temperature_low_3_fault,Level 3 Fault: Low-Temperature,3
+single_cell_voltage_high_3_fault,Level 3 Fault: Cell Overvoltage,3
+single_cell_voltage_low_3_fault,Level 3 Fault: Cell Undervoltage,3
+voltage_unbalance_3_fault,Level 3 Fault: Whole Pack Voltage Imbalance,3
+temperature_unbalance_3_fault,Level 3 Fault: Whole Pack Temperature Imbalance,3
+charge_temperature_low_3_fault,Level 3 Fault: Charging Low-Temperature,3
+charge_temperature_high_3_fault,Level 3 Fault: Charging Over-Temperature,3
+soh_low_3_fault,Level 3 Fault: Excessively Low SOH,3
+discharge_contact_status_record,Discharge Contactor Status Log,
+charge_contact_status_record,Charge Contactor Status Log,
+precharge_contact_status_record,Pre-charge Contactor Status Log,
+discharge_mos_temp_sensor_fault,Discharge MOS Temperature Sensor Fault,
+charge_mos_temp_sensor_fault,Charge MOS Temperature Sensor Fault,
+upgrade_record,Upgrade Operation Record,
+afe_chip_collect_fault,AFE Chip Sampling Fault,
+single_temp_sensor_fault,Cell Temperature Sensor Fault,
+eeprom_storage_fault,EEPROM Storage Fault,
+rtc_fault,RTC Clock Fault,
+vehicle_communication_fault,Vehicle Bus Communication Fault,
+heat_fault,Heating Module Fault,
+charge_status,Charging Status,
+discharge_status,Discharging Status,
+battery_full,Battery Fully Charged,
+shutdown,Power Off,
+power_on,Power On,
+uart_charge_mos_temp_fault,Charging MOS Temperature Detection Fault,
+uart_discharge_mos_temp_fault,Discharging MOS Temperature Detection Fault,
+uart_collect_chip_fault,Sampling Chip Fault,
+uart_collect_chip_comm_fault,Sampling Chip Communication Fault,
+uart_collect_chip_sample_fault,Sampling Chip Sampling Failure,
+uart_voltage_collect_fault,Voltage Sampling Fault,
+uart_total_voltage_detect_fault,Total Pack Voltage Detection Fault,
+uart_current_detect_fault,Current Detection Fault,
+uart_temp_collect_fault,Temperature Sampling Fault,
+uart_flash_storage_fault,FLASH Storage Fault,
+uart_charge_mos_fault,Charging MOS Device Fault,
+uart_discharge_mos_fault,Discharging MOS Device Fault,
+uart_precharge_mos_fault,Pre-charge MOS Device Fault,
+uart_full_charge_fault,Full Charge Triggered Protection Fault,
+uart_balance_comm_fault,Balancing Module Communication Fault,
+uart_charger_reverse_fault,Charger Reverse Polarity Fault,
+uart_b_line_offline_fault,B- Wire Disconnected Fault,
+uart_balance_mode_fault,Balancing Mode Abnormality Fault,
+uart_load_reverse_fault,Load Reverse Polarity Fault,
+uart_current_limit_ntc_fault,Current Limit NTC Sampling Abnormality,
+uart_ble_power_fault,Bluetooth Power Supply Abnormality Fault,
+renewal_order_record,Renewal Order Records,
+no_order_record,No order records,

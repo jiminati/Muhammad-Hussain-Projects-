@@ -1,0 +1,79 @@
+index,key,english,category
+0,uart_charge_mos_off,Charge MOS Forced OFF via UART Command,status
+1,uart_discharge_mos_off,Discharge MOS Forced OFF via UART Command,status
+2,uart_over_voltage,Cell Overvoltage,alarm
+3,uart_under_voltage,Cell Undervoltage,status
+4,uart_voltage_difference,Excessive Voltage Difference,alarm
+5,uart_charge_temp_high,Charging Over-Temperature,alarm
+6,uart_charge_temp_low,Charging Low-Temperature,alarm
+7,uart_discharge_temp_high,Discharging Over-Temperature,alarm
+8,uart_discharge_temp_low,Discharging Low-Temperature,alarm
+9,uart_temp_difference,Excessive Temperature Difference,alarm
+10,uart_total_voltage_high,Pack Overvoltage,alarm
+11,uart_total_voltage_low,Pack Undervoltage,status
+12,uart_charge_current_high,Charging Overcurrent,alarm
+13,uart_discharge_current_high,Discharging Overcurrent,alarm
+14,uart_soc_low,SOC Too Low,alarm
+15,uart_soh_low,SOH Too Low,alarm
+16,uart_mos_temp_high,MOS Over-Temperature,alarm
+17,uart_env_temp_high,Ambient Over-Temperature,alarm
+18,uart_fault_2,Fault Code 2,fault
+19,uart_fault_3,Fault Code 3,fault
+20,uart_fault_4,Fault Code 4,fault
+21,uart_fault_5,Fault Code 5,fault
+22,uart_fault_6,Fault Code 6,fault
+23,uart_charger_connect_success,Smart Charger Connected Successfully,status
+24,uart_charger_connect_fail,Smart Charger Connection Failed,fault
+25,uart_discharger_connect_success,Smart Discharge Cabinet Connected Successfully,status
+26,uart_discharger_connect_fail,Smart Discharge Cabinet Connection Failed,fault
+27,uart_charge_mos_temp_high,Charging MOS Overheating,alarm
+28,uart_charge_mos_temp_fault,Charging MOS Temperature Detection Fault,fault
+29,uart_discharge_mos_temp_high,Discharging MOS Overheating,alarm
+30,uart_discharge_mos_temp_fault,Discharging MOS Temperature Detection Fault,fault
+31,uart_short_circuit_protect,Short-Circuit Protection Triggered,protection
+32,uart_upgrade_flag,Upgrade Flag,status
+33,uart_low_voltage_charge_forbid,Low Voltage Charge Inhibit Fault,fault
+34,uart_high_voltage_discharge_forbid,High Voltage Discharge Inhibit Fault,fault
+35,uart_intranet_parallel_success,Internal Parallel Communication Succeeded,status
+36,uart_intranet_parallel_fail,Internal Parallel Communication Failed,fault
+37,uart_fault_byte7_bit6,Fault Code: Byte7 Bit6,fault
+38,uart_fault_byte7_bit7,Fault Code: Byte7 Bit7,fault
+39,uart_fault_byte8_bit6,Fault Code: Byte8 Bit6,fault
+40,uart_fault_byte8_bit7,Fault Code: Byte8 Bit7,fault
+41,uart_fault_byte9_bit6,Fault Code: Byte9 Bit6,fault
+42,uart_fault_byte9_bit7,Fault Code: Byte9 Bit7,fault
+43,uart_fault_byte10_bit6,Fault Code: Byte10 Bit6,fault
+44,uart_fault_byte10_bit7,Fault Code: Byte10 Bit7,fault
+45,uart_collect_chip_fault,Sampling Chip Fault,fault
+46,uart_collect_chip_comm_fault,Sampling Chip Communication Fault,fault
+47,uart_collect_chip_sample_fault,Sampling Chip Sampling Failure,fault
+48,uart_voltage_collect_fault,Voltage Sampling Fault,fault
+49,uart_voltage_line_offline,Voltage Sampling Wire Disconnected,status
+50,uart_total_voltage_detect_fault,Total Pack Voltage Detection Fault,fault
+51,uart_current_detect_fault,Current Detection Fault,fault
+52,uart_temp_collect_fault,Temperature Sampling Fault,fault
+53,uart_temp_line_offline,Temperature Sampling Wire Disconnected,status
+54,uart_flash_storage_fault,FLASH Storage Fault,fault
+55,uart_charge_mos_fault,Charging MOS Device Fault,fault
+56,uart_discharge_mos_fault,Discharging MOS Device Fault,fault
+57,uart_precharge_mos_fault,Pre-charge MOS Device Fault,fault
+58,uart_comm_cut_charge_mos,Charge MOS Cut Off by UART Command,status
+59,uart_comm_cut_discharge_mos,Discharge MOS Cut Off by UART Command,status
+60,uart_switch_cut_charge_mos,Charge MOS Cut Off by Hardware Switch,status
+61,uart_switch_cut_discharge_mos,Discharge MOS Cut Off by Hardware Switch,status
+62,uart_fan_working,Fan Running,status
+63,uart_heat_working,Heater Running,status
+64,uart_current_limit_working,Current Limiting Module Activated,status
+65,uart_heat_on_status,Heater Enabled Status,status
+66,uart_force_start_status,Forced Start Enabled Status,status
+67,uart_force_status,Forced Activation Status,status
+68,uart_full_charge_fault,Full Charge Triggered Protection Fault,fault
+69,uart_balance_comm_fault,Balancing Module Communication Fault,fault
+70,uart_charger_reverse_fault,Charger Reverse Polarity Fault,fault
+71,uart_b_line_offline_fault,B- Wire Disconnected Fault,fault
+72,uart_balance_mode_fault,Balancing Mode Abnormality Fault,fault
+73,uart_load_reverse_fault,Load Reverse Polarity Fault,fault
+74,uart_current_limit_ntc_fault,Current Limit NTC Sampling Abnormality,fault
+75,uart_ble_power_fault,Bluetooth Power Supply Abnormality Fault,fault
+76,uart_protect_shutdown,Protection Board Powered Off by Protection,protection
+77,uart_protect_power_on,Protection Board Powered On,protection

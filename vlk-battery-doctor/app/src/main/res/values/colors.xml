@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="vlk_ink">#FF070A0F</color>
+    <color name="vlk_accent">#FF2E7BFF</color>
+    <color name="vlk_icon_bg">#FF070A0F</color>
+</resources>

@@ -1,0 +1,190 @@
+key,label,unit
+backlight_mode,Backlight Mode,
+balance_current,Input Balancing Current,A
+balance_start_voltage,Input Balancing Start Voltage,mV
+balance_start_voltage_difference,Input Balancing Start Voltage Difference,mV
+balance_stop_voltage,Input Balancing Stop Voltage,mV
+battery_rated_capacity_ah,,Input battery rated capacity (Ah)
+battery_series,Input Cell Strings,
+battery_series_count,,Input number of series cells (Strings)
+bluetooth_screen_name,Bluetooth Display Name,
+buzzer_switch,Buzzer Switch,
+charge_high_temperature_protection,Input Charging High Temperature Protection,℃
+charge_high_temperature_protection_fahrenheit,,℉
+charge_low_temperature_protection,Input Charging Low Temperature Protection,℃
+charge_low_temperature_protection_fahrenheit,,℉
+charge_overcurrent_protection,Input Charge Overcurrent Protection Value,A
+charging_high_temp_level_1,Level 1 Charging Over-Temperature Threshold,
+charging_high_temp_level_1_fahrenheit,Please input Level 1 charging over-temperature threshold (Unit: ℉),
+charging_high_temp_level_2,Level 2 Charging Over-Temperature Threshold,
+charging_high_temp_level_2_delay,Level 2 Charging Over-Temperature Delay Time,
+charging_high_temp_level_2_fahrenheit,Please input Level 2 charging over-temperature threshold (Unit: ℉),
+charging_high_temp_level_2_recovery,Level 2 Charging Over-Temperature Recovery Value,
+charging_high_temp_level_2_recovery_fahrenheit,Please input Level 2 charging over-temperature recovery value (Unit: ℉),
+charging_high_temp_level_3,Level 3 Charging Over-Temperature Threshold,
+charging_high_temp_level_3_delay,Level 3 Charging Over-Temperature Delay Time,
+charging_high_temp_level_3_fahrenheit,Please input Level 3 charging over-temperature threshold (Unit: ℉),
+charging_high_temp_level_3_recovery,Level 3 Charging Over-Temperature Recovery Value,
+charging_high_temp_level_3_recovery_fahrenheit,Please input Level 3 charging over-temperature recovery value (Unit: ℉),
+charging_low_temp_level_1,Level 1 Charging Low-Temperature Threshold,
+charging_low_temp_level_1_fahrenheit,Please input Level 1 charging low-temperature threshold (Unit: ℉),
+charging_low_temp_level_2,Level 2 Charging Low-Temperature Threshold,
+charging_low_temp_level_2_delay,Level 2 Charging Low-Temperature Delay Time,
+charging_low_temp_level_2_fahrenheit,Please input Level 2 charging low-temperature threshold (Unit: ℉),
+charging_low_temp_level_2_recovery,Level 2 Charging Low-Temperature Recovery Value,
+charging_low_temp_level_2_recovery_fahrenheit,Please input Level 2 charging low-temperature recovery value (Unit: ℉),
+charging_low_temp_level_3,Level 3 Charging Low-Temperature Threshold,
+charging_low_temp_level_3_delay,Level 3 Charging Low-Temperature Delay Time,
+charging_low_temp_level_3_fahrenheit,Please input Level 3 charging low-temperature threshold (Unit: ℉),
+charging_low_temp_level_3_recovery,Level 3 Charging Low-Temperature Recovery Value,
+charging_low_temp_level_3_recovery_fahrenheit,Please input Level 3 charging low-temperature recovery value (Unit: ℉),
+device_sn,Device SN,
+discharge_high_temp_level_1,Level 1 Discharging Over-Temperature Threshold,
+discharge_high_temp_level_1_fahrenheit,Please input Level 1 discharging over-temperature threshold (Unit: ℉),
+discharge_high_temp_level_2,Level 2 Discharging Over-Temperature Threshold,
+discharge_high_temp_level_2_delay,Level 2 Discharging Over-Temperature Delay Time,
+discharge_high_temp_level_2_fahrenheit,Please input Level 2 discharging over-temperature threshold (Unit: ℉),
+discharge_high_temp_level_2_recovery,Level 2 Discharging Over-Temperature Recovery Value,
+discharge_high_temp_level_2_recovery_fahrenheit,Please input Level 2 discharging over-temperature recovery value (Unit: ℉),
+discharge_high_temp_level_3,Level 3 Discharging Over-Temperature Threshold,
+discharge_high_temp_level_3_delay,Level 3 Discharging Over-Temperature Delay Time,
+discharge_high_temp_level_3_fahrenheit,Please input Level 3 discharging over-temperature threshold (Unit: ℉),
+discharge_high_temp_level_3_recovery,Level 3 Discharging Over-Temperature Recovery Value,
+discharge_high_temp_level_3_recovery_fahrenheit,Please input Level 3 discharging over-temperature recovery value (Unit: ℉),
+discharge_high_temperature_protection,Input Discharging High Temperature Protection,℃
+discharge_high_temperature_protection_fahrenheit,,℉
+discharge_low_temp_level_1,Level 1 Discharging Low-Temperature Threshold,
+discharge_low_temp_level_1_fahrenheit,Please input Level 1 discharging low-temperature threshold (Unit: ℉),
+discharge_low_temp_level_2,Level 2 Discharging Low-Temperature Threshold,
+discharge_low_temp_level_2_delay,Level 2 Discharging Low-Temperature Delay Time,
+discharge_low_temp_level_2_fahrenheit,Please input Level 2 discharging low-temperature threshold (Unit: ℉),
+discharge_low_temp_level_2_recovery,Level 2 Discharging Low-Temperature Recovery Value,
+discharge_low_temp_level_2_recovery_fahrenheit,Please input Level 2 discharging low-temperature recovery value (Unit: ℉),
+discharge_low_temp_level_3,Level 3 Discharging Low-Temperature Threshold,
+discharge_low_temp_level_3_delay,Level 3 Discharging Low-Temperature Delay Time,
+discharge_low_temp_level_3_fahrenheit,Please input Level 3 discharging low-temperature threshold (Unit: ℉),
+discharge_low_temp_level_3_recovery,Level 3 Discharging Low-Temperature Recovery Value,
+discharge_low_temp_level_3_recovery_fahrenheit,Please input Level 3 discharging low-temperature recovery value (Unit: ℉),
+discharge_low_temperature_protection,Input Discharging Low Temperature Protection,℃
+discharge_low_temperature_protection_fahrenheit,,℉
+discharge_overcurrent_protection,Input Discharge Overcurrent Protection Value,A
+environment_high_temp_level_1,Level 1 Ambient Over-Temperature Threshold,
+environment_high_temp_level_1_fahrenheit,Please input Level 1 ambient over-temperature threshold (Unit: ℉),
+environment_high_temp_level_2,Level 2 Ambient Over-Temperature Threshold,
+environment_high_temp_level_2_delay,Level 2 Ambient Over-Temperature Delay Time,
+environment_high_temp_level_2_fahrenheit,Please input Level 2 ambient over-temperature threshold (Unit: ℉),
+environment_high_temp_level_2_recovery,Level 2 Ambient Over-Temperature Recovery Value,
+environment_high_temp_level_2_recovery_fahrenheit,Please input Level 2 ambient over-temperature recovery value (Unit: ℉),
+environment_high_temp_level_3,Level 3 Ambient Over-Temperature Threshold,
+environment_high_temp_level_3_delay,Level 3 Ambient Over-Temperature Delay Time,
+environment_high_temp_level_3_fahrenheit,Please input Level 3 ambient over-temperature threshold (Unit: ℉),
+environment_high_temp_level_3_recovery,Level 3 Ambient Over-Temperature Recovery Value,
+environment_high_temp_level_3_recovery_fahrenheit,Please input Level 3 ambient over-temperature recovery value (Unit: ℉),
+example_1,,Example: 1
+example_100,,Example: 100
+fan_start_temperature,Input Fan Startup Temperature,℃
+fan_start_temperature_fahrenheit,,℉
+heating_activation_temperature,Input Heater Turn-on Temperature,℃
+heating_activation_temperature_fahrenheit,,℉
+heating_shut_off_temperature,Input Heater Turn-off Temperature,℃
+heating_shut_off_temperature_fahrenheit,,℉
+mos_high_temp_level_1,Level 1 MOS Over-Temperature Threshold,
+mos_high_temp_level_2,Level 2 MOS Over-Temperature Threshold,
+mos_high_temp_level_2_delay,Level 2 MOS Over-Temperature Delay Time,
+mos_high_temp_level_2_fahrenheit,Please input Level 2 MOS over-temperature threshold (Unit: ℉),
+mos_high_temp_level_2_recovery,Level 2 MOS Over-Temperature Recovery Value,
+mos_high_temp_level_2_recovery_fahrenheit,Please input Level 2 MOS over-temperature recovery value (Unit: ℉),
+mos_high_temp_level_3,Level 3 MOS Over-Temperature Threshold,
+mos_high_temp_level_3_delay,Level 3 MOS Over-Temperature Delay Time,
+mos_high_temp_level_3_fahrenheit,Please input Level 3 MOS over-temperature threshold (Unit: ℉),
+mos_high_temp_level_3_recovery,Level 3 MOS Over-Temperature Recovery Value,
+mos_high_temp_level_3_recovery_fahrenheit,Please input Level 3 MOS over-temperature recovery value (Unit: ℉),
+nickname,Please input new nickname,
+over_current_first,Level 1 Charge Overcurrent Value,
+over_current_second,Level 2 Charge Overcurrent Value,
+over_current_second_delay,Level 2 Charge Overcurrent Delay,
+over_current_third,Level 3 Charge Overcurrent Value,
+over_current_third_delay,Level 3 Charge Overcurrent Delay,
+over_voltage_diff_first,Level 1 Excessive Voltage Difference,
+over_voltage_diff_second,Level 2 Excessive Voltage Difference,
+over_voltage_diff_second_delay,Level 2 Voltage Difference Delay,
+over_voltage_diff_second_recovery,Level 2 Voltage Difference Recovery Value,
+over_voltage_diff_third,Level 3 Excessive Voltage Difference,
+over_voltage_diff_third_delay,Level 3 Voltage Difference Delay,
+over_voltage_diff_third_recovery,Level 3 Voltage Difference Recovery Value,
+power_off_time,Power Off Delay Time,
+rated_capacity,Input Rated Capacity,
+sampling_resistance,Input Sampling Resistance,uΩ
+screen_sleep_time,Please input screen off time (Unit: S),
+short_circuit_trigger_current,Input Short-circuit Trigger Current,A
+single_cell_overvoltage_first,Level 1 Cell Overcharge Value,
+single_cell_overvoltage_protection,Input Cell Overvoltage Protection Value,mV
+single_cell_overvoltage_second,Level 2 Cell Overcharge Value,
+single_cell_overvoltage_second_delay,Level 2 Overcharge Delay,
+single_cell_overvoltage_second_recovery,Level 2 Overcharge Recovery Value,
+single_cell_overvoltage_third,Level 3 Cell Overcharge Value,
+single_cell_overvoltage_third_delay,Level 3 Overcharge Delay,
+single_cell_overvoltage_third_recovery,Level 3 Overcharge Recovery Value,
+single_cell_undervoltage_first,Level 1 Cell Over-discharge Value,
+single_cell_undervoltage_protection,Input Cell Undervoltage Protection Value,mV
+single_cell_undervoltage_second,Level 2 Cell Over-discharge Value,
+single_cell_undervoltage_second_delay,Level 2 Over-discharge Delay,
+single_cell_undervoltage_second_recovery,Level 2 Over-discharge Recovery Value,
+single_cell_undervoltage_third,Level 3 Cell Over-discharge Value,
+single_cell_undervoltage_third_delay,Level 3 Over-discharge Delay,
+single_cell_undervoltage_third_recovery,Level 3 Over-discharge Recovery Value,
+slaveAddress,Slave Board Address,Enter slave board address
+sleep_time,Screen Off Time,
+sleep_time_seconds,,Input sleep duration (Seconds)
+soc,SOC,Input SOC percentage (%)
+socCheck0,SOC 0% Calibration Voltage,
+socCheck0_delay,SOC 0% Calibration Delay,
+socCheck100,SOC 100% Calibration Voltage,
+socCheck100_delay,SOC 100% Calibration Delay,
+socCheck100_low_first,Level 1 Low SOC Threshold,
+socCheck100_low_second,Level 2 Low SOC Threshold,
+socCheck100_low_second_delay,Level 2 Low SOC Delay,
+socCheck100_low_second_recovery,Level 2 Low SOC Recovery Value,
+socCheck100_low_third,Level 3 Low SOC Threshold,
+socCheck100_low_third_delay,Level 3 Low SOC Delay,
+socCheck100_low_third_recovery,Level 3 Low SOC Recovery Value,
+temp_diff_large_1,Level 1 Excessive Temperature Difference Threshold,
+temp_diff_large_1_fahrenheit,Please input Level 1 excessive temperature difference threshold (Unit: ℉),
+temp_diff_large_2,Level 2 Excessive Temperature Difference Threshold,
+temp_diff_large_2_delay,Level 2 Excessive Temperature Difference Delay Time,
+temp_diff_large_2_fahrenheit,Please input Level 2 excessive temperature difference threshold (Unit: ℉),
+temp_diff_large_2_recovery,Level 2 Excessive Temperature Difference Recovery Value,
+temp_diff_large_2_recovery_fahrenheit,Please input Level 2 excessive temperature difference recovery value (Unit: ℉),
+temp_diff_large_3,Level 3 Excessive Temperature Difference Threshold,
+temp_diff_large_3_delay,Level 3 Excessive Temperature Difference Delay Time,
+temp_diff_large_3_fahrenheit,Please input Level 3 excessive temperature difference threshold (Unit: ℉),
+temp_diff_large_3_recovery,Level 3 Excessive Temperature Difference Recovery Value,
+temp_diff_large_3_recovery_fahrenheit,Please input Level 3 excessive temperature difference recovery value (Unit: ℉),
+temperature_control_count,Input Temperature Sensor Quantity,Pieces
+temperature_diff_protection,Input Temperature Difference Protection,℃
+temperature_diff_protection_fahrenheit,,℉
+total_voltage_high_one_alarm,Level 1 Pack Overcharge Value,
+total_voltage_high_three_alarm,Level 3 Pack Overcharge Value,
+total_voltage_high_three_delay,Level 3 Overcharge Delay,
+total_voltage_high_three_recovery,Level 3 Pack Overcharge Recovery Value,
+total_voltage_high_two_alarm,Level 2 Pack Overcharge Value,
+total_voltage_high_two_delay,Level 2 Overcharge Delay,
+total_voltage_high_two_recovery,Level 2 Pack Overcharge Recovery Value,
+total_voltage_low_one_alarm,Level 1 Pack Over-discharge Value,
+total_voltage_low_three_alarm,Level 3 Pack Over-discharge Value,
+total_voltage_low_three_delay,Level 3 Over-discharge Delay,
+total_voltage_low_three_recovery,Level 3 Over-discharge Recovery Value,
+total_voltage_low_two_alarm,Level 2 Pack Over-discharge Value,
+total_voltage_low_two_delay,Level 2 Over-discharge Delay,
+total_voltage_low_two_recovery,Level 2 Over-discharge Recovery Value,
+total_voltage_over_protection,Input Pack Overvoltage Protection Value,V
+total_voltage_under_protection,Input Pack Undervoltage Protection Value,V
+under_current_first_alarm,Level 1 Discharge Overcurrent Value,
+under_current_second_alarm,Level 2 Discharge Overcurrent Value,
+under_current_second_delay,Level 2 Discharge Overcurrent Delay,
+under_current_third_alarm,Level 3 Discharge Overcurrent Value,
+under_current_third_delay,Level 3 Discharge Overcurrent Delay,
+voice_broadcast_language,Voice Broadcast Language,
+voltage_difference_protection,Input Voltage Difference Protection Value,mV
+wifi_password,Enter WiFi Password,
+zero_drift_current,Input Zero Drift Current,A
