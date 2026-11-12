@@ -10,7 +10,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -117,6 +116,13 @@ fun AlarmsScreen(state: AppState) {
             )
         }
 
+        if (groups.isNotEmpty()) {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text("WHAT HAPPENED, AND WHEN", style = Eyebrow, color = Vlk.TextFaint)
+                FaultTimeline(days = remember(state.history) { buildTimeline(state.history) })
+            }
+        }
+
         if (groups.isEmpty()) {
             Column(
                 Modifier
@@ -137,6 +143,7 @@ fun AlarmsScreen(state: AppState) {
             // Severity bar: the shape of the log at a glance.
             AlarmBar(groups)
 
+            Text("BY KIND", style = Eyebrow, color = Vlk.TextFaint)
             Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
                 groups.forEach { g ->
                     AlarmGroupCard(
@@ -156,7 +163,7 @@ fun AlarmsScreen(state: AppState) {
                 .fillMaxWidth()
                 .background(Vlk.Surface, RoundedCornerShape(11.dp))
                 .border(1.dp, Vlk.Line, RoundedCornerShape(11.dp))
-                .clickable { showRaw = !showRaw }
+                .pressable { showRaw = !showRaw }
                 .padding(horizontal = 14.dp, vertical = 13.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -279,7 +286,7 @@ private fun AlarmGroupCard(group: AlarmGroup, open: Boolean, onToggle: () -> Uni
             .fillMaxWidth()
             .background(Vlk.Surface, RoundedCornerShape(13.dp))
             .border(1.dp, Vlk.Line, RoundedCornerShape(13.dp))
-            .clickable(onClick = onToggle)
+            .pressable(onClick = onToggle)
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {

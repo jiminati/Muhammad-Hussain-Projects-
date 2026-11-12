@@ -4,7 +4,6 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -55,7 +55,15 @@ fun Shell(state: AppState) {
     ) {
         Header(state)
 
-        Box(Modifier.weight(1f)) {
+        val enter = screenEnterProgress(state.screen)
+        Box(
+            Modifier
+                .weight(1f)
+                .graphicsLayer {
+                    alpha = enter
+                    translationY = (1f - enter) * 18f
+                }
+        ) {
             when (state.screen) {
                 Screen.SPLASH -> Unit
                 Screen.CONNECT -> ConnectScreen(state)
@@ -142,7 +150,7 @@ private fun Header(state: AppState) {
                             if (state.screen == Screen.ABOUT) Vlk.AccentSoft else Vlk.SurfaceHi,
                             RoundedCornerShape(8.dp)
                         )
-                        .clickable { state.go(Screen.ABOUT) },
+                        .pressable { state.go(Screen.ABOUT) },
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
@@ -189,7 +197,7 @@ private fun ModeToggle(state: AppState) {
     Row(
         Modifier
             .background(Vlk.SurfaceHi, RoundedCornerShape(999.dp))
-            .clickable {
+            .pressable {
                 state.engineeringMode = !state.engineeringMode
                 if (!state.engineeringMode &&
                     (state.screen == Screen.ENGINEER || state.screen == Screen.PARAMETERS)
@@ -274,7 +282,7 @@ private fun BottomTabs(state: AppState) {
                 Column(
                     modifier = Modifier
                         .weight(1f)
-                        .clickable { state.go(screen) }
+                        .pressable { state.go(screen) }
                         .padding(vertical = 7.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(6.dp)

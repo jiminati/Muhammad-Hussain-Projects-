@@ -5,7 +5,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -219,7 +218,7 @@ fun ReportScreen(state: AppState) {
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp,
                 modifier = Modifier
-                    .clickable { showFull = !showFull }
+                    .pressable { showFull = !showFull }
                     .padding(4.dp)
             )
         }
@@ -300,7 +299,7 @@ private fun StatusChoice(
                 color = if (selected) tint else Vlk.Line,
                 shape = RoundedCornerShape(13.dp)
             )
-            .clickable(onClick = onPick)
+            .pressable(onClick = onPick)
             .padding(14.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -350,7 +349,7 @@ private fun ModelChip(label: String, selected: Boolean, onPick: () -> Unit) {
                 if (selected) Vlk.Accent else Vlk.Line,
                 RoundedCornerShape(999.dp)
             )
-            .clickable(onClick = onPick)
+            .pressable(onClick = onPick)
             .padding(horizontal = 15.dp, vertical = 9.dp)
     ) {
         Text(

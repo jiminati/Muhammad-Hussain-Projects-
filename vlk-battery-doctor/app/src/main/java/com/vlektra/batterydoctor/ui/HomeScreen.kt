@@ -88,13 +88,15 @@ fun HomeScreen(state: AppState) {
         // ---------- the verdict, before anything else ----------
         VerdictHero(
             severity = diagnosis.worst,
-            headline = diagnosis.headline
+            headline = diagnosis.headline,
+            modifier = Modifier.riseIn(0)
         )
 
         // ---------- which battery is this ----------
         Row(
             Modifier
                 .fillMaxWidth()
+                .riseIn(1)
                 .background(Vlk.Surface, RoundedCornerShape(14.dp))
                 .border(1.dp, Vlk.Line, RoundedCornerShape(14.dp))
                 .padding(14.dp),
@@ -119,8 +121,14 @@ fun HomeScreen(state: AppState) {
                     style = MaterialTheme.typography.bodySmall
                 )
             }
-            ChargeRing(percent = snapshot.socPercent.toFloat(), tint = fg)
         }
+
+        // ---------- live instruments ----------
+        LiveStrip(
+            snapshot = snapshot,
+            tint = fg,
+            modifier = Modifier.riseIn(2)
+        )
 
         // ---------- the pack, as it physically is ----------
         Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
@@ -170,9 +178,9 @@ fun HomeScreen(state: AppState) {
                     )
                     Spacer(Modifier.width(9.dp))
                     Text(
-                        "The blue dots mark the two busbars joining the modules, at " +
-                            "cells 7 and 18. These joints carry the full current and " +
-                            "take the most vibration, so they break first.",
+                        "Blue dots are the two module joints, at cells 7 and 18. " +
+                            "They carry the whole current and take the vibration, " +
+                            "so they break first.",
                         color = Vlk.TextDim,
                         style = MaterialTheme.typography.bodySmall
                     )
@@ -232,7 +240,11 @@ fun HomeScreen(state: AppState) {
 // ----------------------------------------------------------------------
 
 @Composable
-private fun VerdictHero(severity: Severity, headline: String) {
+private fun VerdictHero(
+    severity: Severity,
+    headline: String,
+    modifier: Modifier = Modifier
+) {
     val reveal by animateFloatAsState(
         targetValue = 1f,
         animationSpec = tween(520, easing = FastOutSlowInEasing),
@@ -241,7 +253,7 @@ private fun VerdictHero(severity: Severity, headline: String) {
     val (fg, bg) = severityColours(severity)
 
     Column(
-        Modifier
+        modifier
             .fillMaxWidth()
             .alpha(reveal)
             .offset(y = ((1f - reveal) * 14).dp)
@@ -283,64 +295,6 @@ private fun VerdictHero(severity: Severity, headline: String) {
     }
 }
 
-/** A charge ring that reads at a glance without a number being the point. */
-@Composable
-private fun ChargeRing(percent: Float, tint: Color) {
-    val p = (percent / 100f).coerceIn(0f, 1f)
-    val anim by animateFloatAsState(
-        targetValue = p,
-        animationSpec = tween(820, easing = FastOutSlowInEasing),
-        label = "chargeRing"
-    )
-    Box(
-        Modifier.size(58.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        androidx.compose.foundation.Canvas(Modifier.fillMaxSize()) {
-            val stroke = 5.dp.toPx()
-            val inset = stroke / 2
-            drawArc(
-                color = Vlk.SurfaceTop,
-                startAngle = 130f,
-                sweepAngle = 280f,
-                useCenter = false,
-                topLeft = androidx.compose.ui.geometry.Offset(inset, inset),
-                size = androidx.compose.ui.geometry.Size(
-                    size.width - stroke, size.height - stroke
-                ),
-                style = androidx.compose.ui.graphics.drawscope.Stroke(
-                    width = stroke,
-                    cap = androidx.compose.ui.graphics.StrokeCap.Round
-                )
-            )
-            drawArc(
-                color = tint,
-                startAngle = 130f,
-                sweepAngle = 280f * anim,
-                useCenter = false,
-                topLeft = androidx.compose.ui.geometry.Offset(inset, inset),
-                size = androidx.compose.ui.geometry.Size(
-                    size.width - stroke, size.height - stroke
-                ),
-                style = androidx.compose.ui.graphics.drawscope.Stroke(
-                    width = stroke,
-                    cap = androidx.compose.ui.graphics.StrokeCap.Round
-                )
-            )
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                "${percent.toInt()}",
-                color = Vlk.Text,
-                fontFamily = FontFamily.Monospace,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
-            )
-            Text("%", color = Vlk.TextFaint, fontSize = 8.sp)
-        }
-    }
-}
-
 @Composable
 fun SectionHeading(text: String) {
     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -377,16 +331,16 @@ private fun ProblemCard(f: Finding) {
                 .background(bg, RoundedCornerShape(3.dp))
                 .border(1.5.dp, fg, RoundedCornerShape(3.dp))
         )
-        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
             Text(
-                f.title,
+                f.brief,
                 color = Vlk.Text,
                 fontWeight = FontWeight.Bold,
-                fontSize = 14.5.sp
+                fontSize = 15.sp
             )
             Text(
-                f.reasoning,
-                color = Vlk.TextDim,
+                f.title,
+                color = Vlk.TextFaint,
                 style = MaterialTheme.typography.bodySmall
             )
         }
@@ -417,16 +371,16 @@ private fun SolutionStep(number: Int, f: Finding) {
                 fontSize = 12.sp
             )
         }
-        Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
-                f.actionUrdu,
+                f.briefAction,
                 color = Vlk.Text,
-                style = MaterialTheme.typography.bodyLarge,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Bold,
+                fontSize = 15.sp
             )
             Text(
-                f.actionEnglish,
-                color = Vlk.TextFaint,
+                f.actionUrdu,
+                color = Vlk.TextDim,
                 style = MaterialTheme.typography.bodySmall
             )
         }

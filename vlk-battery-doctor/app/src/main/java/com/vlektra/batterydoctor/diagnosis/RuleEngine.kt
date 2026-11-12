@@ -98,6 +98,8 @@ object RuleEngine {
             findings += Finding(
                 severity = Severity.OK,
                 title = "Low range complaint, no fault found",
+                brief = "Battery is fine",
+                briefAction = "Explain range to customer",
                 evidence = "Cells balanced, history clean, configuration correct",
                 reasoning = "On a healthy pack a range complaint is almost always " +
                     "charging habit, load or tyre pressure rather than the battery.",
@@ -136,6 +138,8 @@ object RuleEngine {
                     out += Finding(
                         severity = Severity.ENGINEER,
                         title = "Broken busbar suspected at cell $low",
+                        brief = "Joint broken at cell $low",
+                        briefAction = "Repair line",
                         evidence = "Cell $low at ${s.minCellMv} mV, $sag mV below the pack " +
                             "median of ${s.medianMv.roundToInt()} mV",
                         reasoning = "A collapse this large at cell 7 or 18 on a Batch 6 pack " +
@@ -151,6 +155,8 @@ object RuleEngine {
                     out += Finding(
                         severity = Severity.WORKSHOP,
                         title = "Cell $low has collapsed",
+                        brief = "Cell $low collapsed",
+                        briefAction = "Workshop",
                         evidence = "Cell $low at ${s.minCellMv} mV, $sag mV below the median",
                         reasoning = "A single cell this far below the rest will not recover " +
                             "by balancing. Either the connection is bad or the cell is finished.",
@@ -167,6 +173,8 @@ object RuleEngine {
                 out += Finding(
                     severity = Severity.WORKSHOP,
                     title = "Cells out of balance",
+                    brief = "Cells uneven",
+                    briefAction = "Balance overnight",
                     evidence = "Spread ${s.deltaMv} mV — cell $low at ${s.minCellMv} mV, " +
                         "cell ${s.highestCellNumber} at ${s.maxCellMv} mV",
                     reasoning = if (s.underLoad)
@@ -190,6 +198,8 @@ object RuleEngine {
                 out += Finding(
                     severity = Severity.WATCH,
                     title = "Small imbalance building",
+                    brief = "Slightly uneven",
+                    briefAction = "Watch next service",
                     evidence = "Spread ${s.deltaMv} mV, lowest is cell $low",
                     reasoning = "Still inside the safe range, but worth a second reading " +
                         "at the next service to see whether it is growing.",
@@ -202,6 +212,8 @@ object RuleEngine {
                 out += Finding(
                     severity = Severity.OK,
                     title = "Cells are well balanced",
+                    brief = "Cells even",
+                    briefAction = "Nothing to do",
                     evidence = "Spread only ${s.deltaMv} mV across ${s.cellCount} cells",
                     reasoning = "Nothing wrong with the cell group at this state of charge.",
                     actionUrdu = "Cells theek hain.",
@@ -214,6 +226,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.ENGINEER,
                 title = "Pack is deeply discharged",
+                brief = "Dangerously flat",
+                briefAction = "Engineer must charge it",
                 evidence = "Lowest cell ${s.minCellMv} mV, below the " +
                     "${Thresholds.DEEP_DISCHARGE_MV} mV floor",
                 reasoning = "Below 2.8 V an LFP cell begins taking permanent damage, and a " +
@@ -229,6 +243,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WORKSHOP,
                 title = "Temperature spread across the pack",
+                brief = "Uneven heat",
+                briefAction = "Check the sensors",
                 evidence = "Sensors read ${s.tempsC.joinToString(", ") { "$it °C" }} — " +
                     "spread ${s.tempSpreadC} °C",
                 reasoning = "A real ${s.tempSpreadC} °C spread means uneven current sharing; " +
@@ -257,6 +273,8 @@ object RuleEngine {
             Finding(
                 severity = Severity.WATCH,
                 title = "SOC reading does not match the cell voltages",
+                brief = "Charge gauge is wrong",
+                briefAction = "Full charge to reset",
                 evidence = "BMS reports ${"%.1f".format(s.socPercent)}% at " +
                     "${"%.1f".format(s.packVoltage)} V, but ${s.averageMv.roundToInt()} mV per " +
                     "cell works out to roughly ${estimated.roundToInt()}%",
@@ -286,6 +304,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.ENGINEER,
                 title = "Short circuit protection has fired",
+                brief = "Short circuit happened",
+                briefAction = "Engineer checks wiring",
                 evidence = "$shorts event(s)" + (latest(EventCategory.SHORT_CIRCUIT)
                     ?.let { ", most recent $it" } ?: ""),
                 reasoning = "The BMS saw current above its short-circuit trigger. Either the " +
@@ -303,6 +323,8 @@ object RuleEngine {
             sense >= Thresholds.SENSE_FAULTS_SYSTEMIC -> out += Finding(
                 severity = Severity.ENGINEER,
                 title = "Voltage sense harness is failing",
+                brief = "Cannot read the cells",
+                briefAction = "Engineer checks harness",
                 evidence = "$sense voltage sampling faults in the log" +
                     (latest(EventCategory.VOLTAGE_SENSE)?.let { ", most recent $it" } ?: ""),
                 reasoning = "Repeated sampling faults point at the sense wires or the BMS " +
@@ -317,6 +339,8 @@ object RuleEngine {
             sense > 0 -> out += Finding(
                 severity = Severity.WORKSHOP,
                 title = "Voltage sense fault logged",
+                brief = "Cell reading dropped out",
+                briefAction = "Re-seat the connector",
                 evidence = "$sense event(s)" +
                     (latest(EventCategory.VOLTAGE_SENSE)?.let { ", at $it" } ?: ""),
                 reasoning = "A single event can be a loose connector rather than a failing " +
@@ -333,6 +357,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WORKSHOP,
                 title = "Temperature sensor trouble",
+                brief = "Sensor not reporting",
+                briefAction = "Check all four sensors",
                 evidence = "$tempSense temperature sampling fault(s), $deltaT temperature " +
                     "difference alarm(s)",
                 reasoning = "An NTC is reading wrong or has come loose. On these boards NTC " +
@@ -350,6 +376,8 @@ object RuleEngine {
             deep >= Thresholds.UNDERVOLTAGE_HABITUAL -> out += Finding(
                 severity = Severity.WORKSHOP,
                 title = "Pack has been run flat repeatedly",
+                brief = "Run flat too often",
+                briefAction = "Tell the customer",
                 evidence = "$deep cell under-voltage events in the log",
                 reasoning = "Repeated level-3 cut-offs wear the weakest cell faster than the " +
                     "rest, which is how an even pack turns into an uneven one.",
@@ -362,6 +390,8 @@ object RuleEngine {
             deep > 0 -> out += Finding(
                 severity = Severity.WATCH,
                 title = "Some under-voltage cut-offs logged",
+                brief = "Ran flat a few times",
+                briefAction = "Nothing to do",
                 evidence = "$deep event(s)",
                 reasoning = "Normal if the bike was run to empty a few times.",
                 actionUrdu = "Koi kaam nahi. Customer ko normal charging habit samjha dein.",
@@ -373,6 +403,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WATCH,
                 title = "Charged while hot",
+                brief = "Charged while hot",
+                briefAction = "Let it cool first",
                 evidence = "${count(EventCategory.CHARGE_TEMP_HIGH)} charge " +
                     "high-temperature event(s)",
                 reasoning = "Charging above the high-temperature limit trips protection and " +
@@ -388,6 +420,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WATCH,
                 title = "Charged in the cold",
+                brief = "Charged in the cold",
+                briefAction = "Charge indoors",
                 evidence = "${count(EventCategory.CHARGE_TEMP_LOW)} charge " +
                     "low-temperature event(s)",
                 reasoning = "Charging LFP below 0 °C plates lithium and causes permanent " +
@@ -401,6 +435,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WORKSHOP,
                 title = "Overcurrent protection has tripped",
+                brief = "Pulled too much current",
+                briefAction = "Check controller",
                 evidence = "${count(EventCategory.OVERCURRENT)} event(s)",
                 reasoning = "Either the rider is loading the bike beyond its rating or the " +
                     "controller is drawing more than it should.",
@@ -425,6 +461,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WORKSHOP,
                 title = "Capacity Learning is switched on",
+                brief = "Wrong setting: Capacity Learning",
+                briefAction = "Switch it off",
                 evidence = "Basic Settings → Capacity Learning Switch = ON",
                 reasoning = "This is the single most common cause of false low-range " +
                     "complaints on Vlektra packs. It shrinks the usable window the BMS " +
@@ -439,6 +477,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WORKSHOP,
                 title = "Active balancing is switched off",
+                brief = "Balancing is off",
+                briefAction = "Switch it on",
                 evidence = "Balancing → Active Balancing Switch = OFF",
                 reasoning = "With balancing off the weakest cell drifts further every cycle, " +
                     "which ends as a range complaint a few months later.",
@@ -454,6 +494,8 @@ object RuleEngine {
             out += Finding(
                 severity = Severity.WATCH,
                 title = "NTC disconnection protection is disabled",
+                brief = "Sensor protection off",
+                briefAction = "Check sensors by hand",
                 evidence = "Temperature → Disable NTC Disconnection Protection = ON",
                 reasoning = "A failed temperature sensor will not stop the pack. That is a " +
                     "deliberate setting on these boards, but it means temperature faults in " +

@@ -13,7 +13,6 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -158,7 +157,7 @@ private fun CellBlock(
                 color = fg.copy(alpha = if (health == CellHealth.GOOD) 0.34f else 0.95f * alpha),
                 shape = RoundedCornerShape(6.dp)
             )
-            .then(if (onTap != null) Modifier.clickable(onClick = onTap) else Modifier),
+            .then(if (onTap != null) Modifier.pressable(pressedScale = 0.88f, onClick = onTap) else Modifier),
         contentAlignment = Alignment.Center
     ) {
         if (showNumber && group != null) {

@@ -44,6 +44,10 @@ enum class Severity(val rank: Int) {
 data class Finding(
     val severity: Severity,
     val title: String,
+    /** Three or four words for the technician screen. */
+    val brief: String,
+    /** Three or four words saying what to do. */
+    val briefAction: String,
     /** The numbers that prove it, so the verdict can be checked. */
     val evidence: String,
     /** Why this reading means what it means. */
