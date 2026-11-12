@@ -97,8 +97,7 @@ fun PackScreen(state: AppState) {
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .background(Vlk.WatchBg, RoundedCornerShape(11.dp))
-                    .border(1.dp, Vlk.Watch.copy(alpha = 0.45f), RoundedCornerShape(11.dp))
+                    .glass(12.dp, Vlk.Watch, GlassTint.SUBTLE)
                     .padding(12.dp)
             ) {
                 Text(

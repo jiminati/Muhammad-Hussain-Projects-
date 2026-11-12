@@ -47,12 +47,20 @@ fun Shell(state: AppState) {
         return
     }
 
-    Column(
+    val mood = state.diagnosis?.worst?.let { severityColours(it).first } ?: Vlk.Accent
+
+    Box(
         Modifier
             .fillMaxSize()
             .background(Vlk.Ink)
-            .windowInsetsPadding(WindowInsets.systemBars)
     ) {
+        AmbientBackdrop(severity = mood)
+
+        Column(
+            Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.systemBars)
+        ) {
         Header(state)
 
         val enter = screenEnterProgress(state.screen)
@@ -79,7 +87,7 @@ fun Shell(state: AppState) {
                 Box(
                     Modifier
                         .fillMaxSize()
-                        .background(Vlk.Ink.copy(alpha = 0.90f)),
+                        .background(Vlk.Ink.copy(alpha = 0.72f)),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -99,7 +107,8 @@ fun Shell(state: AppState) {
             }
         }
 
-        if (state.connected != null) BottomTabs(state)
+            if (state.connected != null) BottomTabs(state)
+        }
     }
 }
 
@@ -109,7 +118,9 @@ private fun Header(state: AppState) {
         Modifier
             .fillMaxWidth()
             .background(
-                Brush.verticalGradient(listOf(Vlk.Surface, Vlk.Ink))
+                Brush.verticalGradient(
+                    listOf(Color.White.copy(alpha = 0.055f), Color.Transparent)
+                )
             )
             .padding(horizontal = 16.dp)
             .padding(top = 12.dp, bottom = 11.dp)
@@ -196,7 +207,7 @@ private fun ModeToggle(state: AppState) {
 
     Row(
         Modifier
-            .background(Vlk.SurfaceHi, RoundedCornerShape(999.dp))
+            .glass(999.dp)
             .pressable {
                 state.engineeringMode = !state.engineeringMode
                 if (!state.engineeringMode &&
@@ -268,7 +279,11 @@ private fun BottomTabs(state: AppState) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .background(Vlk.Surface)
+                .background(
+                    Brush.verticalGradient(
+                        listOf(Color.Transparent, Color.White.copy(alpha = 0.05f))
+                    )
+                )
                 .padding(horizontal = 6.dp, vertical = 6.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {

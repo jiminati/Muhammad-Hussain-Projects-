@@ -97,8 +97,7 @@ fun HomeScreen(state: AppState) {
             Modifier
                 .fillMaxWidth()
                 .riseIn(1)
-                .background(Vlk.Surface, RoundedCornerShape(14.dp))
-                .border(1.dp, Vlk.Line, RoundedCornerShape(14.dp))
+                .glass(14.dp)
                 .padding(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -166,7 +165,7 @@ fun HomeScreen(state: AppState) {
                 Row(
                     Modifier
                         .fillMaxWidth()
-                        .background(Vlk.SurfaceHi, RoundedCornerShape(10.dp))
+                        .glass(10.dp)
                         .padding(11.dp),
                     verticalAlignment = Alignment.Top
                 ) {
@@ -252,16 +251,18 @@ private fun VerdictHero(
     )
     val (fg, bg) = severityColours(severity)
 
+    val needsAttention = severity.rank >= Severity.WORKSHOP.rank
+
     Column(
         modifier
             .fillMaxWidth()
             .alpha(reveal)
             .offset(y = ((1f - reveal) * 14).dp)
-            .background(
-                Brush.verticalGradient(listOf(bg, Vlk.Surface)),
-                RoundedCornerShape(18.dp)
+            .then(
+                if (needsAttention) Modifier.glassPulse(20.dp, fg)
+                else Modifier.glass(20.dp, fg, GlassTint.STRONG)
             )
-            .border(1.4.dp, fg.copy(alpha = 0.8f), RoundedCornerShape(18.dp))
+            .sheen()
             .padding(18.dp),
         verticalArrangement = Arrangement.spacedBy(7.dp)
     ) {
@@ -316,11 +317,14 @@ fun SectionHeading(text: String) {
 @Composable
 private fun ProblemCard(f: Finding) {
     val (fg, bg) = severityColours(f.severity)
+    val urgent = f.severity.rank >= Severity.WORKSHOP.rank
     Row(
         Modifier
             .fillMaxWidth()
-            .background(Vlk.Surface, RoundedCornerShape(13.dp))
-            .border(1.dp, Vlk.Line, RoundedCornerShape(13.dp))
+            .then(
+                if (urgent) Modifier.glassPulse(14.dp, fg, periodMs = 1900)
+                else Modifier.glass(14.dp, fg, GlassTint.SUBTLE)
+            )
             .padding(13.dp),
         horizontalArrangement = Arrangement.spacedBy(11.dp)
     ) {
@@ -352,15 +356,14 @@ private fun SolutionStep(number: Int, f: Finding) {
     Row(
         Modifier
             .fillMaxWidth()
-            .background(Vlk.Surface, RoundedCornerShape(13.dp))
-            .border(1.dp, Vlk.Line, RoundedCornerShape(13.dp))
+            .glass(14.dp)
             .padding(13.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Box(
             Modifier
                 .size(26.dp)
-                .background(Vlk.AccentSoft, RoundedCornerShape(8.dp)),
+                .glass(9.dp, Vlk.Accent, GlassTint.STRONG),
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -392,8 +395,7 @@ private fun PlainCard(tint: Color, title: String, body: String) {
     Column(
         Modifier
             .fillMaxWidth()
-            .background(Vlk.Surface, RoundedCornerShape(13.dp))
-            .border(1.dp, tint.copy(alpha = 0.45f), RoundedCornerShape(13.dp))
+            .glass(14.dp, tint, GlassTint.SUBTLE)
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(5.dp)
     ) {

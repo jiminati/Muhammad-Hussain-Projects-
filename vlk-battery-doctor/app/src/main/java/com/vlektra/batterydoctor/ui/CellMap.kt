@@ -2,10 +2,6 @@ package com.vlektra.batterydoctor.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -71,18 +67,6 @@ fun CellMap(
     onGroupTap: ((CellState) -> Unit)? = null
 ) {
     val byGroup = remember(cells) { cells.associateBy { it.group } }
-    val hasBroken = cells.any { it.health == CellHealth.BROKEN }
-
-    val pulse by rememberInfiniteTransition(label = "cellPulse")
-        .animateFloat(
-            initialValue = 0.42f,
-            targetValue = 1f,
-            animationSpec = infiniteRepeatable(
-                animation = tween(1100, easing = FastOutSlowInEasing),
-                repeatMode = RepeatMode.Reverse
-            ),
-            label = "cellPulseValue"
-        )
 
     Column(modifier, verticalArrangement = Arrangement.spacedBy(0.dp)) {
         layout.modules.forEachIndexed { moduleIndex, rowRange ->
@@ -104,8 +88,7 @@ fun CellMap(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Vlk.LineSoft, RoundedCornerShape(12.dp))
-                    .border(1.dp, Vlk.Line, RoundedCornerShape(12.dp))
+                    .glass(14.dp)
                     .padding(7.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
@@ -118,7 +101,6 @@ fun CellMap(
                                 state = state,
                                 group = group,
                                 showNumber = showNumbers,
-                                pulse = if (hasBroken) pulse else 1f,
                                 isBridgeEnd = group != null && group in layout.bridgeGroups,
                                 modifier = Modifier.weight(1f),
                                 onTap = if (state != null && onGroupTap != null) {
@@ -138,7 +120,6 @@ private fun CellBlock(
     state: CellState?,
     group: Int?,
     showNumber: Boolean,
-    pulse: Float,
     isBridgeEnd: Boolean,
     modifier: Modifier = Modifier,
     onTap: (() -> Unit)?
@@ -146,16 +127,16 @@ private fun CellBlock(
     val health = state?.health ?: CellHealth.UNKNOWN
     val (fg, bg) = cellColours(health)
 
-    val alpha = if (health == CellHealth.BROKEN) pulse else 1f
-
     Box(
         modifier = modifier
             .aspectRatio(1.25f)
-            .background(bg, RoundedCornerShape(6.dp))
-            .border(
-                width = if (health == CellHealth.BROKEN || health == CellHealth.WEAK) 1.4.dp else 1.dp,
-                color = fg.copy(alpha = if (health == CellHealth.GOOD) 0.34f else 0.95f * alpha),
-                shape = RoundedCornerShape(6.dp)
+            .then(
+                when (health) {
+                    CellHealth.BROKEN -> Modifier.glassPulse(7.dp, fg, periodMs = 1100)
+                    CellHealth.WEAK -> Modifier.glass(7.dp, fg, GlassTint.STRONG)
+                    CellHealth.LOW, CellHealth.HIGH -> Modifier.glass(7.dp, fg, GlassTint.SUBTLE)
+                    else -> Modifier.glass(7.dp)
+                }
             )
             .then(if (onTap != null) Modifier.pressable(pressedScale = 0.88f, onClick = onTap) else Modifier),
         contentAlignment = Alignment.Center
@@ -281,8 +262,7 @@ fun CellDetailStrip(selected: CellState?, packMedianMv: Int?) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .background(bg, RoundedCornerShape(11.dp))
-                .border(1.dp, fg.copy(alpha = 0.6f), RoundedCornerShape(11.dp))
+                .glass(13.dp, fg, GlassTint.STRONG)
                 .padding(horizontal = 13.dp, vertical = 11.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween

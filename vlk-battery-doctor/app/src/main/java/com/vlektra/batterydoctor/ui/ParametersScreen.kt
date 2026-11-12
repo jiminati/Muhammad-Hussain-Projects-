@@ -129,8 +129,7 @@ fun ParametersScreen(state: AppState) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(Vlk.WatchBg, RoundedCornerShape(12.dp))
-                .border(1.dp, Vlk.Watch.copy(alpha = 0.45f), RoundedCornerShape(12.dp))
+                .glass(13.dp, Vlk.Watch, GlassTint.SUBTLE)
                 .padding(13.dp)
         ) {
             Text(

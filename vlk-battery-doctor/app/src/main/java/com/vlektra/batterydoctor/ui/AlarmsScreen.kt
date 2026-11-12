@@ -127,8 +127,7 @@ fun AlarmsScreen(state: AppState) {
             Column(
                 Modifier
                     .fillMaxWidth()
-                    .background(Vlk.OkBg, RoundedCornerShape(14.dp))
-                    .border(1.dp, Vlk.Ok.copy(alpha = 0.5f), RoundedCornerShape(14.dp))
+                    .glass(15.dp, Vlk.Ok, GlassTint.STRONG)
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
@@ -161,8 +160,7 @@ fun AlarmsScreen(state: AppState) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .background(Vlk.Surface, RoundedCornerShape(11.dp))
-                .border(1.dp, Vlk.Line, RoundedCornerShape(11.dp))
+                .glass(11.dp)
                 .pressable { showRaw = !showRaw }
                 .padding(horizontal = 14.dp, vertical = 13.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -189,7 +187,7 @@ fun AlarmsScreen(state: AppState) {
             Column(
                 Modifier
                     .fillMaxWidth()
-                    .background(Vlk.LineSoft, RoundedCornerShape(11.dp))
+                    .glass(11.dp)
                     .padding(11.dp),
                 verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
@@ -284,8 +282,7 @@ private fun AlarmGroupCard(group: AlarmGroup, open: Boolean, onToggle: () -> Uni
     Column(
         Modifier
             .fillMaxWidth()
-            .background(Vlk.Surface, RoundedCornerShape(13.dp))
-            .border(1.dp, Vlk.Line, RoundedCornerShape(13.dp))
+            .glass(13.dp)
             .pressable(onClick = onToggle)
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)

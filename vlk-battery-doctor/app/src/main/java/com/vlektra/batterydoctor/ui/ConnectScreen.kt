@@ -145,8 +145,7 @@ fun ConnectScreen(state: AppState) {
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .background(Vlk.EngineerBg, RoundedCornerShape(12.dp))
-                    .border(1.dp, Vlk.Engineer.copy(alpha = 0.5f), RoundedCornerShape(12.dp))
+                    .glass(13.dp, Vlk.Engineer, GlassTint.STRONG)
                     .padding(13.dp)
             ) {
                 Text(msg, color = Vlk.Engineer, style = MaterialTheme.typography.bodySmall)
@@ -156,7 +155,7 @@ fun ConnectScreen(state: AppState) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(Vlk.Accent.copy(alpha = 0.10f), RoundedCornerShape(12.dp))
+                .glass(13.dp, Vlk.Accent, GlassTint.SUBTLE)
                 .padding(13.dp)
         ) {
             Text(
@@ -196,11 +195,9 @@ private fun PackRow(pack: DiscoveredPack, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Vlk.Surface, RoundedCornerShape(14.dp))
-            .border(
-                width = if (strong) 1.5.dp else 1.dp,
-                color = if (strong) Vlk.Accent else Vlk.Line,
-                shape = RoundedCornerShape(14.dp)
+            .then(
+                if (strong) Modifier.glass(16.dp, Vlk.Accent, GlassTint.STRONG)
+                else Modifier.glass(16.dp)
             )
             .pressable(onClick = onClick)
             .padding(14.dp),
@@ -210,10 +207,8 @@ private fun PackRow(pack: DiscoveredPack, onClick: () -> Unit) {
         Box(
             Modifier
                 .size(42.dp)
-                .background(
-                    if (strong) Vlk.Accent else Vlk.SurfaceHi,
-                    RoundedCornerShape(11.dp)
-                ),
+                .glass(12.dp, if (strong) Vlk.Accent else null,
+                    if (strong) GlassTint.STRONG else GlassTint.NONE),
             contentAlignment = Alignment.Center
         ) {
             Text(

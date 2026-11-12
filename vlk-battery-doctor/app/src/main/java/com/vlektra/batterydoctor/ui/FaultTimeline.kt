@@ -187,7 +187,7 @@ private fun DayRow(
                 Column(
                     Modifier
                         .fillMaxWidth()
-                        .background(Vlk.LineSoft, RoundedCornerShape(10.dp))
+                        .glass(10.dp)
                         .padding(10.dp),
                     verticalArrangement = Arrangement.spacedBy(5.dp)
                 ) {

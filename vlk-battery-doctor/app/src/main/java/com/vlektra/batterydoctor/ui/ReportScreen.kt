@@ -226,8 +226,7 @@ fun ReportScreen(state: AppState) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(Vlk.LineSoft, RoundedCornerShape(12.dp))
-                .border(1.dp, Vlk.Line, RoundedCornerShape(12.dp))
+                .glass(12.dp)
                 .padding(13.dp)
         ) {
             Text(

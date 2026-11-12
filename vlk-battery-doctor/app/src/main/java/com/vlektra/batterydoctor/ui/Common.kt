@@ -52,8 +52,7 @@ fun Card(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(Vlk.Surface, RoundedCornerShape(14.dp))
-            .border(1.dp, Vlk.Line, RoundedCornerShape(14.dp))
+            .glass(14.dp)
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         content = content
@@ -105,7 +104,7 @@ fun KeyValue(label: String, value: String, mono: Boolean = true) {
 fun Stat(label: String, value: String, accent: Color = Vlk.Text, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .background(Vlk.SurfaceHi, RoundedCornerShape(10.dp))
+            .glass(10.dp)
             .padding(horizontal = 10.dp, vertical = 9.dp),
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {

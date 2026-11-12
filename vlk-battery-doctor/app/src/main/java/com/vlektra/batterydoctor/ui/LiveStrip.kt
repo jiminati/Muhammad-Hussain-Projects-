@@ -65,8 +65,7 @@ fun LiveStrip(
     Column(
         modifier
             .fillMaxWidth()
-            .background(Vlk.Surface, RoundedCornerShape(16.dp))
-            .border(1.dp, Vlk.Line, RoundedCornerShape(16.dp))
+            .glass(16.dp)
             .padding(14.dp),
         verticalArrangement = Arrangement.spacedBy(13.dp)
     ) {
