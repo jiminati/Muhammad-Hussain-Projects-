@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.vlektra.batterydoctor.AppState
 import com.vlektra.batterydoctor.model.AccessTier
 import com.vlektra.batterydoctor.ui.theme.Vlk
+import androidx.compose.ui.text.font.FontFamily
 
 @Composable
 fun ParametersScreen(state: AppState) {

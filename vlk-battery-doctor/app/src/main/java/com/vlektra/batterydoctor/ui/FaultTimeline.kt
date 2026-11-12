@@ -35,6 +35,7 @@ import com.vlektra.batterydoctor.model.EventCategory
 import com.vlektra.batterydoctor.model.HistoryEvent
 import com.vlektra.batterydoctor.ui.theme.Eyebrow
 import com.vlektra.batterydoctor.ui.theme.Vlk
+import androidx.compose.material3.Text
 
 /**
  * What happened, and when — as a picture.
