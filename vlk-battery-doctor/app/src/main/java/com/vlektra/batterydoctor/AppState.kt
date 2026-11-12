@@ -17,13 +17,20 @@ import com.vlektra.batterydoctor.model.JobCard
 import com.vlektra.batterydoctor.model.PackSnapshot
 import kotlinx.coroutines.launch
 
-enum class Screen { CONNECT, PACK, DIAGNOSIS, HISTORY, PARAMETERS, REPORT, ABOUT }
+enum class Screen { SPLASH, CONNECT, HOME, ALARMS, ENGINEER, PARAMETERS, REPORT, ABOUT }
 
 class AppState : ViewModel() {
 
     // ---- navigation ----
-    var screen by mutableStateOf(Screen.CONNECT)
+    var screen by mutableStateOf(Screen.SPLASH)
         private set
+
+    /** Engineering mode shows the raw numbers. Base mode hides them. */
+    var engineeringMode by mutableStateOf(false)
+
+    fun splashDone() {
+        if (screen == Screen.SPLASH) screen = Screen.CONNECT
+    }
 
     fun go(to: Screen) {
         screen = to
@@ -132,7 +139,7 @@ class AppState : ViewModel() {
             recompute()
             busy = false
             busyLabel = ""
-            if (snapshot != null) screen = Screen.PACK
+            if (snapshot != null) screen = Screen.HOME
         }
     }
 

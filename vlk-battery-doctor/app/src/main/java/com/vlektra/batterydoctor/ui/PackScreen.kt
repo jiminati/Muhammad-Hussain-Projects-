@@ -149,7 +149,7 @@ fun PackScreen(state: AppState) {
                 Text("Re-read", color = Vlk.Text, fontWeight = FontWeight.SemiBold)
             }
             Button(
-                onClick = { state.go(Screen.DIAGNOSIS) },
+                onClick = { state.go(Screen.ALARMS) },
                 modifier = Modifier
                     .weight(1.4f)
                     .height(48.dp),
@@ -159,7 +159,7 @@ fun PackScreen(state: AppState) {
                     contentColor = Color.White
                 )
             ) {
-                Text("See diagnosis", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                Text("See alarms", fontWeight = FontWeight.Bold, fontSize = 15.sp)
             }
         }
     }

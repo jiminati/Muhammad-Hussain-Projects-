@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        requestBluetoothPermissions()
+        requestPermissions()
         setContent {
             VlkTheme {
                 Box(Modifier.fillMaxSize().background(Vlk.Ink)) {
@@ -35,16 +35,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun requestBluetoothPermissions() {
-        val needed = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            arrayOf(
-                Manifest.permission.BLUETOOTH_SCAN,
-                Manifest.permission.BLUETOOTH_CONNECT
-            )
-        } else {
-            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+    private fun requestPermissions() {
+        val needed = buildList {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                add(Manifest.permission.BLUETOOTH_SCAN)
+                add(Manifest.permission.BLUETOOTH_CONNECT)
+            } else {
+                add(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+            // Fills the City field on the report; the technician can always type it.
+            add(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
-        permissionLauncher.launch(needed)
+        permissionLauncher.launch(needed.toTypedArray())
     }
 }
 

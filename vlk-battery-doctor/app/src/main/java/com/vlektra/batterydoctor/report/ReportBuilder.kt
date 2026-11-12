@@ -37,11 +37,13 @@ object ReportBuilder {
         b.appendLine("*${diagnosis.worst.verdict.uppercase()}*")
         b.appendLine(diagnosis.headline)
         b.appendLine()
-        if (job.chassisNumber.isNotBlank()) b.appendLine("Chassis: ${job.chassisNumber}")
-        if (job.batteryId.isNotBlank()) b.appendLine("Battery: ${job.batteryId}")
-        else b.appendLine("Battery: ${snapshot.deviceName}")
-        if (job.customerName.isNotBlank()) b.appendLine("Customer: ${job.customerName}")
         if (job.city.isNotBlank()) b.appendLine("City: ${job.city}")
+        if (job.model.isNotBlank()) b.appendLine("Model: ${job.model}")
+        if (job.customerName.isNotBlank()) b.appendLine("Customer: ${job.customerName}")
+        if (job.chassisNumber.isNotBlank()) b.appendLine("Chassis: ${job.chassisNumber}")
+        b.appendLine("Battery: ${job.batteryId.ifBlank { snapshot.deviceName }}")
+        b.appendLine()
+        b.appendLine("*Status:* ${job.status.label}")
         b.appendLine()
         b.appendLine(
             "Pack ${"%.1f".format(snapshot.packVoltage)} V · " +
@@ -93,12 +95,14 @@ object ReportBuilder {
         b.appendLine(dash("City", job.city))
         b.appendLine(dash("Technician", job.technician))
         b.appendLine(dash("Complaint", job.complaint))
+        b.appendLine(dash("Status", job.status.label))
         b.appendLine()
 
         b.appendLine("VERDICT")
         b.appendLine(rule)
         b.appendLine("${diagnosis.worst.verdict} [${diagnosis.worst.badge}]")
         b.appendLine(diagnosis.headline)
+        b.appendLine("Outcome: ${job.status.label}")
         b.appendLine()
 
         b.appendLine("PACK IDENTITY")

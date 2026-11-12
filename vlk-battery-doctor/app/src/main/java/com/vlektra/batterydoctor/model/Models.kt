@@ -100,17 +100,35 @@ data class BmsParameters(
 /** Which tier of user may change a given parameter. */
 enum class AccessTier { TECHNICIAN, ENGINEER, LOCKED }
 
+/** Where the battery goes after this visit. */
+enum class RepairStatus(val label: String, val urdu: String) {
+    WORKING("Working", "Theek hai"),
+    SENT_TO_PLANT("Sent to plant", "Plant bheji"),
+    REPAIRING_AT_CENTRE("Repairing at service centre", "Service centre par repair");
+
+    companion object {
+        val ordered = listOf(WORKING, SENT_TO_PLANT, REPAIRING_AT_CENTRE)
+    }
+}
+
 /** Identity of the pack and the job, used on the report. */
 data class JobCard(
     val batteryId: String = "",
     val chassisNumber: String = "",
     val customerName: String = "",
     val customerPhone: String = "",
+    /** Bike model — V180, V180 SE, Bolt, Pave, 1969, Retro. */
     val model: String = "",
     val city: String = "",
     val technician: String = "",
-    val complaint: String = ""
+    val complaint: String = "",
+    val status: RepairStatus = RepairStatus.WORKING
 )
+
+/** The models in Vlektra's line, offered as chips so nobody types them wrong. */
+object BikeModels {
+    val all = listOf("V180", "V180 SE", "Bolt", "Pave", "1969", "Retro")
+}
 
 /** A pack found over Bluetooth. */
 data class DiscoveredPack(
