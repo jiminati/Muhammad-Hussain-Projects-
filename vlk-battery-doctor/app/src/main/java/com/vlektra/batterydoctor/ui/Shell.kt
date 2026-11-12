@@ -42,6 +42,8 @@ import com.vlektra.batterydoctor.ui.theme.Vlk
 @Composable
 fun Shell(state: AppState) {
 
+    ConnectionFeedback(state)
+
     if (state.screen == Screen.SPLASH) {
         SplashScreen(onFinished = { state.splashDone() })
         return

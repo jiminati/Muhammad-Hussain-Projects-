@@ -28,6 +28,9 @@ class AppState : ViewModel() {
     /** Engineering mode shows the raw numbers. Base mode hides them. */
     var engineeringMode by mutableStateOf(false)
 
+    /** The connection chime. Off for anyone working somewhere quiet. */
+    var soundOn by mutableStateOf(true)
+
     fun splashDone() {
         if (screen == Screen.SPLASH) screen = Screen.CONNECT
     }

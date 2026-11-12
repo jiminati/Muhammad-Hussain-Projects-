@@ -17,6 +17,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.vlektra.batterydoctor.AppState
 import com.vlektra.batterydoctor.ui.theme.Vlk
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun AboutScreen(state: AppState) {
@@ -30,6 +39,52 @@ fun AboutScreen(state: AppState) {
     ) {
         Spacer(Modifier.height(4.dp))
         Text("About", style = MaterialTheme.typography.headlineSmall, color = Vlk.Text)
+
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .glass(14.dp)
+                .pressable { state.soundOn = !state.soundOn }
+                .padding(14.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    "Connection chime",
+                    color = Vlk.Text,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    if (state.soundOn)
+                        "Sounds and buzzes when a battery connects"
+                    else
+                        "Silent",
+                    color = Vlk.TextDim,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+            Spacer(Modifier.width(12.dp))
+            Box(
+                Modifier
+                    .width(46.dp)
+                    .height(27.dp)
+                    .glass(999.dp, if (state.soundOn) Vlk.Accent else null,
+                        if (state.soundOn) GlassTint.STRONG else GlassTint.NONE),
+                contentAlignment =
+                    if (state.soundOn) Alignment.CenterEnd else Alignment.CenterStart
+            ) {
+                Box(
+                    Modifier
+                        .padding(horizontal = 4.dp)
+                        .size(19.dp)
+                        .background(
+                            if (state.soundOn) Color.White else Vlk.TextDim,
+                            RoundedCornerShape(999.dp)
+                        )
+                )
+            }
+        }
 
         Card {
             SectionLabel("Build")
