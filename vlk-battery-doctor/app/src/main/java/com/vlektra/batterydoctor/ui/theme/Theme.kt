@@ -37,9 +37,11 @@ object Vlk {
     val LineSoft = Color(0xFF161F2B)
 
     // --- text ---
+    // Raised for glass: panels sit lighter than the solid cards they replaced,
+    // and the small uppercase labels failed against them at the old values.
     val Text = Color(0xFFEDF2F9)
-    val TextDim = Color(0xFF8795AA)
-    val TextFaint = Color(0xFF5A6678)
+    val TextDim = Color(0xFF9DAABD)
+    val TextFaint = Color(0xFF8E9BB0)
 
     // --- status ---
     val Ok = Color(0xFF34D399)
